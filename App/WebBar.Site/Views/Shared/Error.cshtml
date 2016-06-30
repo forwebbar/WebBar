@@ -1,0 +1,19 @@
+﻿@model System.Web.Mvc.HandleErrorInfo
+
+@{
+    ViewBag.Title = "Ошибка";
+}
+
+<h1 class="text-danger">Error.</h1>
+@{
+   if (string.IsNullOrEmpty(ViewBag.errorMessage))
+   {
+      <h2 class="text-danger">Произошла ошибка при запросе. Вы можете @Html.ActionLink("вернуться", "Index","Home") на главную страницу.</h2>
+   }
+   else
+   {
+      <h2 class="text-danger">@ViewBag.errorMessage</h2>
+   }
+}
+
+

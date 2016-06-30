@@ -1,0 +1,57 @@
+﻿@using System.Web.Optimization
+@using WebBar.Site.Models
+@using WebBar.Site.Repositories
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @Scripts.Render("~/bundles/jquery.watable")
+    <style type="text/css">
+    body {
+        background: @Html.GetBackgroundImageUrl();
+    }
+    </style>
+
+</head>
+<body>
+<div id="container">
+
+    <div id="content">
+        @Html.Partial("_LoginPartial")
+        @RenderBody()
+    </div>
+</div>
+
+<div>
+    <footer class="footer" id="footer">
+        @if (Model is SaleViewModel || Model is MainShopRepository)
+        {
+
+            <div class="container" style="color: gray">
+                <div class="row">
+                    <div class="col-md-2"> ООО Бир-Контрол</div>
+                    <div class="col-md-7"></div>
+                    <div class="col-md-3">Техподдержка <a href="mailto:support@beer-control.ru">support@beer-control.ru</a>
+                    </div>
+                </div>
+            </div>
+        }
+        else
+        {
+            <p style="text-align: center">
+                Техподдержка <a href="mailto:support@beer-control.ru">support@beer-control.ru</a>
+            </p>
+        }
+    </footer>
+</div>
+
+
+@RenderSection("scripts", required: false)
+</body>
+</html>

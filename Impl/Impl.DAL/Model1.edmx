@@ -1,0 +1,489 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="Хранилище BeerControlModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012.Azure" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Device">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="1024" Nullable="false" />
+          <Property Name="Uid" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="idMarket" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="DeviceDayTotal">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="idDevice" Type="bigint" Nullable="false" />
+          <Property Name="TapCode" Type="int" Nullable="false" />
+          <Property Name="DayTotal" Type="bigint" Nullable="false" />
+          <Property Name="Ts" Type="datetimeoffset" Precision="7" Nullable="false" />
+        </EntityType>
+        <EntityType Name="DeviceTap">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="idDevice" Type="bigint" Nullable="false" />
+          <Property Name="idDrink" Type="int" />
+          <Property Name="TapCode" Type="int" Nullable="false" />
+          <Property Name="idFutureDrink" Type="int" />
+          <Property Name="FutureDrinkDate" Type="datetimeoffset" Precision="7" />
+        </EntityType>
+        <EntityType Name="DeviceVurVals">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="idDevice" Type="bigint" Nullable="false" />
+          <Property Name="idMarket" Type="int" Nullable="false" />
+          <Property Name="TapCode" Type="int" Nullable="false" />
+          <Property Name="idFill" Type="bigint" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Drink">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="1024" Nullable="false" />
+          <Property Name="Code" Type="nvarchar" MaxLength="64" Nullable="false" />
+          <Property Name="idProducer" Type="int" Nullable="false" />
+          <Property Name="idUser" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Fill">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="idDevice" Type="bigint" Nullable="false" />
+          <Property Name="TapCode" Type="int" Nullable="false" />
+          <Property Name="Volume" Type="int" Nullable="false" />
+          <Property Name="Ts" Type="datetimeoffset" Precision="7" Nullable="false" />
+          <Property Name="OperationCode" Type="int" Nullable="false" />
+          <Property Name="Total" Type="bigint" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Market">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="1024" Nullable="false" />
+          <Property Name="Code" Type="nvarchar" MaxLength="64" Nullable="false" />
+          <Property Name="Address" Type="nvarchar(max)" />
+          <Property Name="idUser" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="MarketDrink">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="idMarket" Type="int" Nullable="false" />
+          <Property Name="idDrink" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Price">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="idDrink" Type="int" Nullable="false" />
+          <Property Name="Val" Type="int" Nullable="false" />
+          <Property Name="StartTs" Type="datetimeoffset" Precision="7" Nullable="false" />
+          <Property Name="EndTs" Type="datetimeoffset" Precision="7" />
+          <Property Name="idMarket" Type="int" />
+        </EntityType>
+        <EntityType Name="Producer">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Code" Type="nvarchar" MaxLength="64" Nullable="false" />
+          <Property Name="Address" Type="nvarchar(max)" />
+          <Property Name="INN" Type="nvarchar" MaxLength="64" />
+          <Property Name="idUser" Type="int" Nullable="false" />
+          <Property Name="Kpp" Type="nvarchar(max)" />
+          <Property Name="Ogrn" Type="nvarchar(max)" />
+          <Property Name="Account" Type="nvarchar(max)" />
+          <Property Name="Bik" Type="nvarchar(max)" />
+          <Property Name="Bank" Type="nvarchar(max)" />
+          <Property Name="ActualDate" Type="datetimeoffset" Precision="7" />
+          <Property Name="ActualAddress" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="Sell">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="idMarket" Type="int" Nullable="false" />
+          <Property Name="idDrink" Type="int" />
+          <Property Name="idFill" Type="bigint" Nullable="false" />
+          <Property Name="idPrice" Type="int" Nullable="false" />
+          <Property Name="Volume" Type="int" Nullable="false" />
+          <Property Name="Sum" Type="int" Nullable="false" />
+          <Property Name="isCleaning" Type="bit" Nullable="false" />
+          <Property Name="Ts" Type="datetimeoffset" Precision="7" Nullable="false" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Login" Type="varchar" MaxLength="128" Nullable="false" />
+          <Property Name="Password" Type="varchar" MaxLength="128" Nullable="false" />
+          <Property Name="ExpireDate" Type="datetimeoffset" Precision="7" Nullable="false" />
+          <Property Name="Fio" Type="nvarchar(max)" />
+          <Property Name="Name" Type="nvarchar(max)" />
+          <Property Name="Email" Type="varchar" MaxLength="256" Nullable="false" />
+          <Property Name="Phone" Type="varchar" MaxLength="128" />
+        </EntityType>
+        <EntityContainer Name="Хранилище BeerControlModelContainer">
+          <EntitySet Name="Device" EntityType="Self.Device" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DeviceDayTotal" EntityType="Self.DeviceDayTotal" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DeviceTap" EntityType="Self.DeviceTap" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DeviceVurVals" EntityType="Self.DeviceVurVals" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Drink" EntityType="Self.Drink" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Fill" EntityType="Self.Fill" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Market" EntityType="Self.Market" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MarketDrink" EntityType="Self.MarketDrink" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Price" EntityType="Self.Price" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Producer" EntityType="Self.Producer" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Sell" EntityType="Self.Sell" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="BeerControlModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Device">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="1024" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Uid" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="idMarket" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="DeviceDayTotal">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="idDevice" Type="Int64" Nullable="false" />
+          <Property Name="TapCode" Type="Int32" Nullable="false" />
+          <Property Name="DayTotal" Type="Int64" Nullable="false" />
+          <Property Name="Ts" Type="DateTimeOffset" Nullable="false" Precision="7" />
+        </EntityType>
+        <EntityType Name="DeviceTap">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="idDevice" Type="Int64" Nullable="false" />
+          <Property Name="idDrink" Type="Int32" />
+          <Property Name="TapCode" Type="Int32" Nullable="false" />
+          <Property Name="idFutureDrink" Type="Int32" />
+          <Property Name="FutureDrinkDate" Type="DateTimeOffset" Precision="7" />
+        </EntityType>
+        <EntityType Name="DeviceVurVals">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="idDevice" Type="Int64" Nullable="false" />
+          <Property Name="idMarket" Type="Int32" Nullable="false" />
+          <Property Name="TapCode" Type="Int32" Nullable="false" />
+          <Property Name="idFill" Type="Int64" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Drink">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="1024" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Code" Type="String" MaxLength="64" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="idProducer" Type="Int32" Nullable="false" />
+          <Property Name="idUser" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Fill">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="idDevice" Type="Int64" Nullable="false" />
+          <Property Name="TapCode" Type="Int32" Nullable="false" />
+          <Property Name="Volume" Type="Int32" Nullable="false" />
+          <Property Name="Ts" Type="DateTimeOffset" Nullable="false" Precision="7" />
+          <Property Name="OperationCode" Type="Int32" Nullable="false" />
+          <Property Name="Total" Type="Int64" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Market">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="1024" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Code" Type="String" MaxLength="64" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Address" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="idUser" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="MarketDrink">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="idMarket" Type="Int32" Nullable="false" />
+          <Property Name="idDrink" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Price">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="idDrink" Type="Int32" Nullable="false" />
+          <Property Name="Val" Type="Int32" Nullable="false" />
+          <Property Name="StartTs" Type="DateTimeOffset" Nullable="false" Precision="7" />
+          <Property Name="EndTs" Type="DateTimeOffset" Precision="7" />
+          <Property Name="idMarket" Type="Int32" />
+        </EntityType>
+        <EntityType Name="Producer">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Code" Type="String" MaxLength="64" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Address" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="INN" Type="String" MaxLength="64" FixedLength="false" Unicode="true" />
+          <Property Name="idUser" Type="Int32" Nullable="false" />
+          <Property Name="Kpp" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Ogrn" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Account" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Bik" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Bank" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ActualDate" Type="DateTimeOffset" Precision="7" />
+          <Property Name="ActualAddress" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Sell">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="idMarket" Type="Int32" Nullable="false" />
+          <Property Name="idDrink" Type="Int32" />
+          <Property Name="idFill" Type="Int64" Nullable="false" />
+          <Property Name="idPrice" Type="Int32" Nullable="false" />
+          <Property Name="Volume" Type="Int32" Nullable="false" />
+          <Property Name="Sum" Type="Int32" Nullable="false" />
+          <Property Name="isCleaning" Type="Boolean" Nullable="false" />
+          <Property Name="Ts" Type="DateTimeOffset" Nullable="false" Precision="7" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Login" Type="String" MaxLength="128" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Password" Type="String" MaxLength="128" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ExpireDate" Type="DateTimeOffset" Nullable="false" Precision="7" />
+          <Property Name="Fio" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Email" Type="String" MaxLength="256" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Phone" Type="String" MaxLength="128" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityContainer Name="BeerControlEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Device" EntityType="Self.Device" />
+          <EntitySet Name="DeviceDayTotal" EntityType="Self.DeviceDayTotal" />
+          <EntitySet Name="DeviceTap" EntityType="Self.DeviceTap" />
+          <EntitySet Name="DeviceVurVals" EntityType="Self.DeviceVurVals" />
+          <EntitySet Name="Drink" EntityType="Self.Drink" />
+          <EntitySet Name="Fill" EntityType="Self.Fill" />
+          <EntitySet Name="Market" EntityType="Self.Market" />
+          <EntitySet Name="MarketDrink" EntityType="Self.MarketDrink" />
+          <EntitySet Name="Price" EntityType="Self.Price" />
+          <EntitySet Name="Producer" EntityType="Self.Producer" />
+          <EntitySet Name="Sell" EntityType="Self.Sell" />
+          <EntitySet Name="User" EntityType="Self.User" />
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Хранилище BeerControlModelContainer" CdmEntityContainer="BeerControlEntities">
+          <EntitySetMapping Name="Device">
+            <EntityTypeMapping TypeName="BeerControlModel.Device">
+              <MappingFragment StoreEntitySet="Device">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Uid" ColumnName="Uid" />
+                <ScalarProperty Name="idMarket" ColumnName="idMarket" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DeviceDayTotal">
+            <EntityTypeMapping TypeName="BeerControlModel.DeviceDayTotal">
+              <MappingFragment StoreEntitySet="DeviceDayTotal">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="idDevice" ColumnName="idDevice" />
+                <ScalarProperty Name="TapCode" ColumnName="TapCode" />
+                <ScalarProperty Name="DayTotal" ColumnName="DayTotal" />
+                <ScalarProperty Name="Ts" ColumnName="Ts" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DeviceTap">
+            <EntityTypeMapping TypeName="BeerControlModel.DeviceTap">
+              <MappingFragment StoreEntitySet="DeviceTap">
+                <ScalarProperty Name="FutureDrinkDate" ColumnName="FutureDrinkDate" />
+                <ScalarProperty Name="idFutureDrink" ColumnName="idFutureDrink" />
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="idDevice" ColumnName="idDevice" />
+                <ScalarProperty Name="idDrink" ColumnName="idDrink" />
+                <ScalarProperty Name="TapCode" ColumnName="TapCode" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DeviceVurVals">
+            <EntityTypeMapping TypeName="BeerControlModel.DeviceVurVals">
+              <MappingFragment StoreEntitySet="DeviceVurVals">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="idDevice" ColumnName="idDevice" />
+                <ScalarProperty Name="idMarket" ColumnName="idMarket" />
+                <ScalarProperty Name="TapCode" ColumnName="TapCode" />
+                <ScalarProperty Name="idFill" ColumnName="idFill" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Drink">
+            <EntityTypeMapping TypeName="BeerControlModel.Drink">
+              <MappingFragment StoreEntitySet="Drink">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Code" ColumnName="Code" />
+                <ScalarProperty Name="idProducer" ColumnName="idProducer" />
+                <ScalarProperty Name="idUser" ColumnName="idUser" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Fill">
+            <EntityTypeMapping TypeName="BeerControlModel.Fill">
+              <MappingFragment StoreEntitySet="Fill">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="idDevice" ColumnName="idDevice" />
+                <ScalarProperty Name="TapCode" ColumnName="TapCode" />
+                <ScalarProperty Name="Volume" ColumnName="Volume" />
+                <ScalarProperty Name="Ts" ColumnName="Ts" />
+                <ScalarProperty Name="OperationCode" ColumnName="OperationCode" />
+                <ScalarProperty Name="Total" ColumnName="Total" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Market">
+            <EntityTypeMapping TypeName="BeerControlModel.Market">
+              <MappingFragment StoreEntitySet="Market">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Code" ColumnName="Code" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="idUser" ColumnName="idUser" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MarketDrink">
+            <EntityTypeMapping TypeName="BeerControlModel.MarketDrink">
+              <MappingFragment StoreEntitySet="MarketDrink">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="idMarket" ColumnName="idMarket" />
+                <ScalarProperty Name="idDrink" ColumnName="idDrink" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Price">
+            <EntityTypeMapping TypeName="BeerControlModel.Price">
+              <MappingFragment StoreEntitySet="Price">
+                <ScalarProperty Name="idMarket" ColumnName="idMarket" />
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="idDrink" ColumnName="idDrink" />
+                <ScalarProperty Name="Val" ColumnName="Val" />
+                <ScalarProperty Name="StartTs" ColumnName="StartTs" />
+                <ScalarProperty Name="EndTs" ColumnName="EndTs" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Producer">
+            <EntityTypeMapping TypeName="BeerControlModel.Producer">
+              <MappingFragment StoreEntitySet="Producer">
+                <ScalarProperty Name="ActualAddress" ColumnName="ActualAddress" />
+                <ScalarProperty Name="ActualDate" ColumnName="ActualDate" />
+                <ScalarProperty Name="Bank" ColumnName="Bank" />
+                <ScalarProperty Name="Bik" ColumnName="Bik" />
+                <ScalarProperty Name="Account" ColumnName="Account" />
+                <ScalarProperty Name="Ogrn" ColumnName="Ogrn" />
+                <ScalarProperty Name="Kpp" ColumnName="Kpp" />
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Code" ColumnName="Code" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="INN" ColumnName="INN" />
+                <ScalarProperty Name="idUser" ColumnName="idUser" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Sell">
+            <EntityTypeMapping TypeName="BeerControlModel.Sell">
+              <MappingFragment StoreEntitySet="Sell">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="idMarket" ColumnName="idMarket" />
+                <ScalarProperty Name="idDrink" ColumnName="idDrink" />
+                <ScalarProperty Name="idFill" ColumnName="idFill" />
+                <ScalarProperty Name="idPrice" ColumnName="idPrice" />
+                <ScalarProperty Name="Volume" ColumnName="Volume" />
+                <ScalarProperty Name="Sum" ColumnName="Sum" />
+                <ScalarProperty Name="isCleaning" ColumnName="isCleaning" />
+                <ScalarProperty Name="Ts" ColumnName="Ts" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="User">
+            <EntityTypeMapping TypeName="BeerControlModel.User">
+              <MappingFragment StoreEntitySet="User">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="Login" ColumnName="Login" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="ExpireDate" ColumnName="ExpireDate" />
+                <ScalarProperty Name="Fio" ColumnName="Fio" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="false" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Нет" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

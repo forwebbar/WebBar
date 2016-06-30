@@ -1,0 +1,30 @@
+
+
+.form-signin {
+  max-width: 330px;
+  background-color:white;
+}
+.form-signin .checkbox {
+  font-weight: normal;
+}
+.form-signin .form-control {
+  position: relative;
+  height: auto;
+  -webkit-box-sizing: border-box;
+     -moz-box-sizing: border-box;
+          box-sizing: border-box;
+  font-size: 16px;
+}
+.form-signin .form-control:focus {
+  z-index: 2;
+}
+.form-signin input {
+   width:275px;
+      margin-bottom: -1px;
+}
+.form-signin input[type="submit"] {
+   width:100px;
+}
+.form-signin input[type="checkbox"] {
+   width:auto;
+}

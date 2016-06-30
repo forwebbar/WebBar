@@ -1,0 +1,57 @@
+﻿@using Contracts.Common.AppServer
+@using GridMvc.Html
+@model WebBar.Site.Repositories.MainShopRepository
+@{
+ViewBag.Title = "Все точки продаж";
+}
+
+<div class="jumbotron">
+    <nav class="navbar navbar-default navbarWhite">
+        <div class="container-fluid">
+            <div id="navbar" class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    <li>@Html.ActionLink("Отчеты", "Index", "Home")</li>
+                    <li><a href="#">Поступления</a></li>
+                    <li class="active"><a href="#">Справочники</a></li>
+                    <li><a href="#">Настройки</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container body-content">
+        <table>
+            <tr>
+                <td width="70%">
+                    <nav>
+                        <ul class="nav nav-pills nav-justified">
+                            <li>@Html.ActionLink("Сорта", "Index", "References")</li>
+                            <li>@Html.ActionLink("Поставщики", "Producers", "References")</li>
+                            <li class="active"><a href="#">Все точки продаж</a></li>
+                        </ul>
+                    </nav>
+                </td>
+                <td />
+            </tr>
+        </table>
+
+
+        @Html.Grid(Model.ClientProxyBeerConfig.Execute(a=>a.GetMarketsConfig(Model.UserPass))).Columns(columns =>
+   {
+       columns.Add(c => c.Code).Titled("ID").Sanitized(false).Encoded(false);
+       columns.Add(c => c.Name).Titled("Наименование").Sanitized(false).Encoded(false);
+       columns.Add(c => c.Address).Titled("Адрес").Sanitized(false).Encoded(false);
+       columns.Add(c => c.Id).Titled("").Sanitized(false).Encoded(false).RenderValueAs(a => EditShop(a.Id));
+   }).WithPaging(10).Sortable(true)
+
+        @helper EditShop(int idShop)
+        {
+        <div class="pull-right">
+            @Html.ActionLink("Настройка", "EditShopConfig", "References", new { shopId = idShop }, null)
+        </div>
+}
+        <div class="col-md-10">
+            @Html.ActionLink("Добавить", "AddShopConfig", "References", null, null)
+        </div>
+    </div>
+</div>

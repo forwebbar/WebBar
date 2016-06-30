@@ -1,0 +1,41 @@
+﻿@using System.Web.Optimization
+@model WebBar.Site.Models.VerifyCodeViewModel
+@{
+    ViewBag.Title = "Ввод кода подтверждения";
+}
+
+<div class="outer">
+    <div class="middle">
+        <div class="inner">
+            <section class="loginform cf">
+                @using (Html.BeginForm("VerifyCode", "Account", new { ReturnUrl = Model.ReturnUrl, @class = "form-signin" }, FormMethod.Post))
+                {
+                    @Html.AntiForgeryToken()
+
+                    @Html.ValidationSummary("", new { @class = "text-danger" })
+
+                    <table>
+                        <tr>
+                            <td>
+                                Ввод кода подтверждения
+                            </td>
+                            <td>
+                                @Html.TextBoxFor(m => m.Code)
+                            </td>
+                        </tr>
+                    </table>
+
+                    <div class="centerBlock">
+                        <input type="submit" value="Отправить" class="btn btn-lg btn-primary btn-block" />
+                    </div>
+                }
+            </section>
+        </div>
+    </div>
+</div>
+
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

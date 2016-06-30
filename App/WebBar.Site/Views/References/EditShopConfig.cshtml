@@ -1,0 +1,119 @@
+﻿@using System.Web.Optimization
+@using Contracts.Common.AppServer
+@using GridMvc.Html
+@model WebBar.Site.Models.ShopConfigViewModel
+
+<div class="col-md-4 col-md-offset-3">
+
+    <h2>Правка</h2>
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-horizontal">
+            @Html.HiddenFor(model => model.Entity.Id)
+
+            @Html.HiddenFor(model=>model.JsonDrinkSettings);
+            <div class="form-group">
+                @Html.Label("Имя", htmlAttributes: new { @class = "control-label col-md-4" })
+                <div class="col-md-6">
+                    @Html.EditorFor(model => model.Entity.Name, new { htmlAttributes = new { @class = "form-control" } })
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.Label("Адрес", htmlAttributes: new {@class = "control-label col-md-4"})
+                <div class="col-md-6">
+                    @Html.EditorFor(model => model.Entity.Address, new {htmlAttributes = new {@class = "form-control"}})
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.Label("Контроллер №", htmlAttributes: new {@class = "control-label col-md-4"})
+                <div class="col-md-6">
+                    @Html.EditorFor(model => model.Entity.DeviceSerial, new {htmlAttributes = new {@class = "form-control"}})
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.Label("Дата начала действия изменения", htmlAttributes: new {@class = "control-label col-md-4"})
+                <div class="col-md-6">
+                    <div class="input-group date" id="datetimepicker">
+                        <input type="text" id="DrinkPriceStart" name="DrinkPriceStart" class="form-control"/>
+                        <span class="input-group-addon">
+                            <span class="glyphicon glyphicon-calendar"></span>
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        if (Model.Entity.Drinks != null)
+        {
+            @Html.Grid(Model.Entity.Drinks).Columns(columns =>
+            {
+                columns.Add(c => c.TapCode).Titled("Кран").Sanitized(false).Encoded(false);
+                columns.Add(c => c.CurDrink).Titled("Текущий сорт").Sanitized(false).Encoded(false).RenderValueAs(a => a.CurDrink != null ? a.CurDrink.Name : "");
+                columns.Add(c => c.FutureDrink).Titled("Будущий сорт").Sanitized(false).Encoded(false).RenderValueAs(a => a.FutureDrink != null ? a.FutureDrink.Name : "");
+                columns.Add(c => c.NewDrink).Titled("Новый сорт").Sanitized(false).Encoded(false).RenderValueAs(a => DrinkEditRender(a));
+            }).WithPaging(10).Sortable(true)
+        }
+
+        <div class="form-group">
+            <div class="col-md-10">
+                <button class="btn btn-default">Сохранить</button>
+            </div>
+        </div>
+    }
+
+    
+
+    <p>
+        @Html.ActionLink("Обратно к списку магазинов", "Shops", null, new {@class = "active col-md-4 col-md-offset-4"})
+
+    </p>
+
+</div>
+
+@helper DrinkEditRender(MarketDrinkListItemDto drinkMarketDto)
+{
+
+    @Html.DropDownListFor(model => drinkMarketDto.NewDrink,
+        new SelectList(
+            Model.Drinks,
+            "Id",
+            "Name",
+            drinkMarketDto.FutureDrink), new { @class = "thVal", tapCode=drinkMarketDto.TapCode, id=drinkMarketDto.TapCode})
+
+}
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+
+}
+
+<script type="text/javascript">
+    $(function() {
+        $("#datetimepicker").datetimepicker({ locale: 'ru', format: 'DD-MM-YYYY', date: '@Model.Entity.ActualDate.ToString("o")' });
+
+        var drinkSettings = {};
+        function setMarketDrink(tapCode, idMarket, value) {
+            $.ajax({
+                method: 'POST',
+                url: 'EditMarketDrink',
+                data: { tapCode: tapCode, idMarket: idMarket, idNewDrink: value }
+            });
+        }
+
+        $('.thVal').change(function() {
+            var tapCode = $(this).attr('tapCode');
+            var value = $(this).val();
+
+            drinkSettings[tapCode] = value;
+
+            $('#JsonDrinkSettings').attr('value', JSON.stringify(drinkSettings));
+            //setMarketDrink(tapCode, @Model.Entity.Id, value);
+        });
+    });
+
+</script>
+

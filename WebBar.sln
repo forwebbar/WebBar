@@ -1,0 +1,179 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.24720.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Contracts", "Contracts", "{08A8A592-3323-4EC1-9671-3EA026DB2F02}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Impl", "Impl", "{836DD213-6C64-4668-BC6A-7C9A613E6F83}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "App", "App", "{D67FF784-579F-4C95-B9A5-CB148051BED0}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{6273FF66-788F-4D94-BD5C-E9FAB85E267E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Impl.Core", "Impl\Impl.Core\Impl.Core.csproj", "{6F1A544D-E5D6-4D77-AD82-A637075870CE}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{0B7D4DAE-2F95-4B4F-BEFF-5DBF8484E1DE}"
+	ProjectSection(SolutionItems) = preProject
+		.nuget\NuGet.Config = .nuget\NuGet.Config
+		.nuget\NuGet.exe = .nuget\NuGet.exe
+		.nuget\NuGet.targets = .nuget\NuGet.targets
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Contracts.Common", "Contracts\Contracts.Common\Contracts.Common.csproj", "{377A9C20-CAF6-4E78-9659-00DAAABAF972}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Impl.Client", "Impl\Impl.Client\Impl.Client.csproj", "{84988321-E0B9-47D1-81B3-CE9E121F9086}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebBar.AuthorizeServer", "App\WebBar.AuthorizeServer\WebBar.AuthorizeServer.csproj", "{D4B52C43-588B-42B6-AE39-5DF2EA6C623E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Impl.Server", "Impl\Impl.Server\Impl.Server.csproj", "{4F8B3257-CFA8-4404-B8C1-07842B5BF198}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebBar.Site", "App\WebBar.Site\WebBar.Site.csproj", "{2C4E095D-0308-4054-84EA-A17E47F9584E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebBar.Site.UnitTests", "Tests\WebBar.Site.UnitTests\WebBar.Site.UnitTests.csproj", "{04D141B4-331F-4E3D-A956-1BAC184C9973}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SmallTests", "Tests\SmallTests\SmallTests.csproj", "{FE55284A-8BF3-4B58-A206-AC7B932BEB2E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Contracts.Retail", "Contracts\Contracts.Retail\Contracts.Retail.csproj", "{42B3DB28-799B-4BB4-8714-D8FC051773C9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Retail.SmallTests", "Tests\Retail.SmallTests\Retail.SmallTests.csproj", "{B8101EA1-8968-4697-BBF3-AA0673B2919F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Impl.DAL", "Impl\Impl.DAL\Impl.DAL.csproj", "{5B1A7822-260E-4A04-8F01-F3E4C4531D38}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebBar.BeerServer", "App\WebBar.BeerServer\WebBar.BeerServer.csproj", "{A0C6A38E-A3B2-4A86-83DD-8B241EB6B3B1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Contracts", "Contracts\Contracts\Contracts.csproj", "{1A1F5052-3D3B-4995-BD86-5FFE59B7434E}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{6F1A544D-E5D6-4D77-AD82-A637075870CE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6F1A544D-E5D6-4D77-AD82-A637075870CE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6F1A544D-E5D6-4D77-AD82-A637075870CE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6F1A544D-E5D6-4D77-AD82-A637075870CE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{377A9C20-CAF6-4E78-9659-00DAAABAF972}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{377A9C20-CAF6-4E78-9659-00DAAABAF972}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{377A9C20-CAF6-4E78-9659-00DAAABAF972}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{377A9C20-CAF6-4E78-9659-00DAAABAF972}.Release|Any CPU.Build.0 = Release|Any CPU
+		{84988321-E0B9-47D1-81B3-CE9E121F9086}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{84988321-E0B9-47D1-81B3-CE9E121F9086}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{84988321-E0B9-47D1-81B3-CE9E121F9086}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{84988321-E0B9-47D1-81B3-CE9E121F9086}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D4B52C43-588B-42B6-AE39-5DF2EA6C623E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D4B52C43-588B-42B6-AE39-5DF2EA6C623E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D4B52C43-588B-42B6-AE39-5DF2EA6C623E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D4B52C43-588B-42B6-AE39-5DF2EA6C623E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4F8B3257-CFA8-4404-B8C1-07842B5BF198}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4F8B3257-CFA8-4404-B8C1-07842B5BF198}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4F8B3257-CFA8-4404-B8C1-07842B5BF198}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4F8B3257-CFA8-4404-B8C1-07842B5BF198}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2C4E095D-0308-4054-84EA-A17E47F9584E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2C4E095D-0308-4054-84EA-A17E47F9584E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2C4E095D-0308-4054-84EA-A17E47F9584E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2C4E095D-0308-4054-84EA-A17E47F9584E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{04D141B4-331F-4E3D-A956-1BAC184C9973}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{04D141B4-331F-4E3D-A956-1BAC184C9973}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{04D141B4-331F-4E3D-A956-1BAC184C9973}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FE55284A-8BF3-4B58-A206-AC7B932BEB2E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FE55284A-8BF3-4B58-A206-AC7B932BEB2E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FE55284A-8BF3-4B58-A206-AC7B932BEB2E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{42B3DB28-799B-4BB4-8714-D8FC051773C9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{42B3DB28-799B-4BB4-8714-D8FC051773C9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{42B3DB28-799B-4BB4-8714-D8FC051773C9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{42B3DB28-799B-4BB4-8714-D8FC051773C9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B8101EA1-8968-4697-BBF3-AA0673B2919F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B8101EA1-8968-4697-BBF3-AA0673B2919F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B8101EA1-8968-4697-BBF3-AA0673B2919F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5B1A7822-260E-4A04-8F01-F3E4C4531D38}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5B1A7822-260E-4A04-8F01-F3E4C4531D38}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5B1A7822-260E-4A04-8F01-F3E4C4531D38}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5B1A7822-260E-4A04-8F01-F3E4C4531D38}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A0C6A38E-A3B2-4A86-83DD-8B241EB6B3B1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A0C6A38E-A3B2-4A86-83DD-8B241EB6B3B1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A0C6A38E-A3B2-4A86-83DD-8B241EB6B3B1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A0C6A38E-A3B2-4A86-83DD-8B241EB6B3B1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1A1F5052-3D3B-4995-BD86-5FFE59B7434E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1A1F5052-3D3B-4995-BD86-5FFE59B7434E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1A1F5052-3D3B-4995-BD86-5FFE59B7434E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1A1F5052-3D3B-4995-BD86-5FFE59B7434E}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{6F1A544D-E5D6-4D77-AD82-A637075870CE} = {836DD213-6C64-4668-BC6A-7C9A613E6F83}
+		{377A9C20-CAF6-4E78-9659-00DAAABAF972} = {08A8A592-3323-4EC1-9671-3EA026DB2F02}
+		{84988321-E0B9-47D1-81B3-CE9E121F9086} = {836DD213-6C64-4668-BC6A-7C9A613E6F83}
+		{D4B52C43-588B-42B6-AE39-5DF2EA6C623E} = {D67FF784-579F-4C95-B9A5-CB148051BED0}
+		{4F8B3257-CFA8-4404-B8C1-07842B5BF198} = {836DD213-6C64-4668-BC6A-7C9A613E6F83}
+		{2C4E095D-0308-4054-84EA-A17E47F9584E} = {D67FF784-579F-4C95-B9A5-CB148051BED0}
+		{04D141B4-331F-4E3D-A956-1BAC184C9973} = {6273FF66-788F-4D94-BD5C-E9FAB85E267E}
+		{FE55284A-8BF3-4B58-A206-AC7B932BEB2E} = {6273FF66-788F-4D94-BD5C-E9FAB85E267E}
+		{42B3DB28-799B-4BB4-8714-D8FC051773C9} = {08A8A592-3323-4EC1-9671-3EA026DB2F02}
+		{B8101EA1-8968-4697-BBF3-AA0673B2919F} = {6273FF66-788F-4D94-BD5C-E9FAB85E267E}
+		{5B1A7822-260E-4A04-8F01-F3E4C4531D38} = {836DD213-6C64-4668-BC6A-7C9A613E6F83}
+		{A0C6A38E-A3B2-4A86-83DD-8B241EB6B3B1} = {D67FF784-579F-4C95-B9A5-CB148051BED0}
+		{1A1F5052-3D3B-4995-BD86-5FFE59B7434E} = {08A8A592-3323-4EC1-9671-3EA026DB2F02}
+	EndGlobalSection
+	GlobalSection(TeamFoundationVersionControl) = preSolution
+		SccNumberOfProjects = 14
+		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccTeamFoundationServer = https://bestpetrovich.visualstudio.com/
+		SccLocalPath0 = .
+		SccProjectUniqueName1 = Impl\\Impl.Core\\Impl.Core.csproj
+		SccProjectTopLevelParentUniqueName1 = WebBar.sln
+		SccProjectName1 = Impl/Impl.Core
+		SccLocalPath1 = Impl\\Impl.Core
+		SccProjectUniqueName2 = Contracts\\Contracts.Common\\Contracts.Common.csproj
+		SccProjectTopLevelParentUniqueName2 = WebBar.sln
+		SccProjectName2 = Contracts/Contracts.Common
+		SccLocalPath2 = Contracts\\Contracts.Common
+		SccProjectUniqueName3 = Impl\\Impl.Client\\Impl.Client.csproj
+		SccProjectTopLevelParentUniqueName3 = WebBar.sln
+		SccProjectName3 = Impl/Impl.Client
+		SccLocalPath3 = Impl\\Impl.Client
+		SccProjectUniqueName4 = App\\WebBar.AuthorizeServer\\WebBar.AuthorizeServer.csproj
+		SccProjectTopLevelParentUniqueName4 = WebBar.sln
+		SccProjectName4 = App/WebBar.AuthorizeServer
+		SccLocalPath4 = App\\WebBar.AuthorizeServer
+		SccProjectUniqueName5 = Impl\\Impl.Server\\Impl.Server.csproj
+		SccProjectTopLevelParentUniqueName5 = WebBar.sln
+		SccProjectName5 = Impl/Impl.Server
+		SccLocalPath5 = Impl\\Impl.Server
+		SccProjectUniqueName6 = App\\WebBar.Site\\WebBar.Site.csproj
+		SccProjectTopLevelParentUniqueName6 = WebBar.sln
+		SccProjectName6 = App/WebBar.Site
+		SccLocalPath6 = App\\WebBar.Site
+		SccProjectUniqueName7 = Tests\\WebBar.Site.UnitTests\\WebBar.Site.UnitTests.csproj
+		SccProjectTopLevelParentUniqueName7 = WebBar.sln
+		SccProjectName7 = Tests/WebBar.Site.UnitTests
+		SccLocalPath7 = Tests\\WebBar.Site.UnitTests
+		SccProjectUniqueName8 = Tests\\SmallTests\\SmallTests.csproj
+		SccProjectTopLevelParentUniqueName8 = WebBar.sln
+		SccProjectName8 = Tests/SmallTests
+		SccLocalPath8 = Tests\\SmallTests
+		SccProjectUniqueName9 = Contracts\\Contracts.Retail\\Contracts.Retail.csproj
+		SccProjectTopLevelParentUniqueName9 = WebBar.sln
+		SccProjectName9 = Contracts/Contracts.Retail
+		SccLocalPath9 = Contracts\\Contracts.Retail
+		SccProjectUniqueName10 = Tests\\Retail.SmallTests\\Retail.SmallTests.csproj
+		SccProjectTopLevelParentUniqueName10 = WebBar.sln
+		SccProjectName10 = Tests/Retail.SmallTests
+		SccLocalPath10 = Tests\\Retail.SmallTests
+		SccProjectUniqueName11 = Impl\\Impl.DAL\\Impl.DAL.csproj
+		SccProjectTopLevelParentUniqueName11 = WebBar.sln
+		SccProjectName11 = Impl/Impl.DAL
+		SccLocalPath11 = Impl\\Impl.DAL
+		SccProjectUniqueName12 = App\\WebBar.BeerServer\\WebBar.BeerServer.csproj
+		SccProjectTopLevelParentUniqueName12 = WebBar.sln
+		SccProjectName12 = App/WebBar.BeerServer
+		SccLocalPath12 = App\\WebBar.BeerServer
+		SccProjectUniqueName13 = Contracts\\Contracts\\Contracts.csproj
+		SccProjectTopLevelParentUniqueName13 = WebBar.sln
+		SccProjectName13 = Contracts/Contracts
+		SccLocalPath13 = Contracts\\Contracts
+	EndGlobalSection
+EndGlobal

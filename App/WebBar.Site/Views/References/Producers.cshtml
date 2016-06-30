@@ -1,0 +1,56 @@
+﻿@using Contracts.Common.AppServer
+@using GridMvc.Html
+@model WebBar.Site.Repositories.MainShopRepository
+@{
+ViewBag.Title = "Поставщики";
+}
+
+<div class="jumbotron">
+    <nav class="navbar navbar-default navbarWhite">
+        <div class="container-fluid">
+            <div id="navbar" class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    <li>@Html.ActionLink("Отчеты", "Index", "Home")</li>
+                    <li><a href="#">Поступления</a></li>
+                    <li class="active"><a href="#">Справочники</a></li>
+                    <li><a href="#">Настройки</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container body-content">
+    <table>
+        <tr>
+            <td width="70%">
+                <nav>
+                    <ul class="nav nav-pills nav-justified">
+                        <li >@Html.ActionLink("Сорта", "Index", "References")</li>
+                        <li class="active"><a href="#">Поставщики</a></li>
+                        <li>@Html.ActionLink("Все точки продаж", "Shops", "References")</li>
+                    </ul>
+                </nav>
+            </td>
+                <td />
+        </tr>
+    </table>
+        @Html.Grid(Model.ClientProxyBeerConfig.Execute(a => a.GetProducers(Model.UserPass))).Columns(columns =>
+         {
+             columns.Add(c => c.Code).Titled("ID").Sanitized(false).Encoded(false);
+             columns.Add(c => c.Name).Titled("Наименование").Sanitized(false).Encoded(false);
+             columns.Add(c => c.Inn).Titled("ИНН/КПП").Sanitized(false).Encoded(false).RenderValueAs(a => EditProducer(a));
+         }).WithPaging(10).Sortable(true)
+
+        @helper EditProducer(ProducerDto producer)
+        {
+        <div>
+            @Html.ActionLink(producer.Inn + "/" + producer.Kpp, "EditProducerConfig", "References", new { producerId = producer.Id }, null)
+        </div>
+}
+        <div class="col-md-10">
+            @Html.ActionLink("Добавить", "AddProducerConfig", "References", null, null)
+        </div>
+
+
+    </div>
+</div>

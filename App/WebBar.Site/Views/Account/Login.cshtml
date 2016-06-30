@@ -1,0 +1,71 @@
+﻿
+@using System.Web.Optimization
+@model WebBar.Site.Models.LoginViewModel
+@{
+    ViewBag.Title = "Вход";
+}
+
+<div class="outer">
+    <div class="middle">
+        <div class="inner">
+            <section class="loginform cf">
+                @using (Html.BeginForm("Login", "Account", new { ViewBag.ReturnUrl }, FormMethod.Post, new { name = "login", @class = "form-signin" }))
+                {
+                    @Html.AntiForgeryToken()
+
+                    <table>
+                        <tr>
+                            <td>
+                                <h2 class="centerBlock">Авторизация</h2>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                Имя пользователя:
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                @Html.TextBoxFor(m => m.Username)
+                            </td>
+
+                        </tr>
+                        <tr>
+                            <td>
+                                Пароль:
+                            </td>
+
+                        </tr>
+                        <tr>
+                            <td>
+                                @Html.PasswordFor(m => m.Password)
+                            </td>
+
+                        </tr>
+                        <tr>
+                            <td>
+                                <input type="checkbox">Запомнить меня<br />
+                            </td>
+
+                        </tr>
+                    </table>
+
+                    <div style=" text-align: center">
+                        @Html.ValidationSummary(true, "Проверьте введенные данные", new { @class = "text-danger" })
+                    </div>
+                    <div class="centerBlock">
+                        <input type="submit" value="Войти" class="btn btn-lg btn-primary btn-block " />
+                    </div>
+                    <div style=" text-align: center">
+                        <a href="#">Восстановить забытый пароль</a>
+                    </div>
+
+                }
+            </section>
+        </div>
+    </div>
+</div>
+
+    @section Scripts {
+        @Scripts.Render("~/bundles/jqueryval")
+    }
