@@ -42,9 +42,9 @@ namespace WebBar.BeerServer
             if (!int.TryParse(ConfigurationManager.AppSettings["CycleLimit"], out cycleLimit))
                 cycleLimit = 10;
 
-            _collector = new FileCollector(folder, cycleLimit);
-            _backGroundProcess = new BackGroundProcess(_collector);
-            _backGroundProcess.Start();
+            //_collector = new FileCollector(folder, cycleLimit);
+            //_backGroundProcess = new BackGroundProcess(_collector);
+            //_backGroundProcess.Start();
 
             _logger.Info("OnStart");
         }

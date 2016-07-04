@@ -1,12 +1,10 @@
 ﻿using System;
 using System.Collections.Specialized;
 using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 using WebBar.Site.Enum;
 using WebBar.Site.Models;
 using WebBar.Site.Security;
-using static System.String;
 
 namespace WebBar.Site.Controllers
 {

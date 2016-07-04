@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
-VisualStudioVersion = 14.0.24720.0
+VisualStudioVersion = 14.0.25123.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Contracts", "Contracts", "{08A8A592-3323-4EC1-9671-3EA026DB2F02}"
 EndProject
@@ -75,9 +75,11 @@ Global
 		{2C4E095D-0308-4054-84EA-A17E47F9584E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2C4E095D-0308-4054-84EA-A17E47F9584E}.Release|Any CPU.Build.0 = Release|Any CPU
 		{04D141B4-331F-4E3D-A956-1BAC184C9973}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{04D141B4-331F-4E3D-A956-1BAC184C9973}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{04D141B4-331F-4E3D-A956-1BAC184C9973}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{04D141B4-331F-4E3D-A956-1BAC184C9973}.Release|Any CPU.Build.0 = Release|Any CPU
 		{FE55284A-8BF3-4B58-A206-AC7B932BEB2E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FE55284A-8BF3-4B58-A206-AC7B932BEB2E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FE55284A-8BF3-4B58-A206-AC7B932BEB2E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FE55284A-8BF3-4B58-A206-AC7B932BEB2E}.Release|Any CPU.Build.0 = Release|Any CPU
 		{42B3DB28-799B-4BB4-8714-D8FC051773C9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
@@ -85,6 +87,7 @@ Global
 		{42B3DB28-799B-4BB4-8714-D8FC051773C9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{42B3DB28-799B-4BB4-8714-D8FC051773C9}.Release|Any CPU.Build.0 = Release|Any CPU
 		{B8101EA1-8968-4697-BBF3-AA0673B2919F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B8101EA1-8968-4697-BBF3-AA0673B2919F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B8101EA1-8968-4697-BBF3-AA0673B2919F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B8101EA1-8968-4697-BBF3-AA0673B2919F}.Release|Any CPU.Build.0 = Release|Any CPU
 		{5B1A7822-260E-4A04-8F01-F3E4C4531D38}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
@@ -117,63 +120,5 @@ Global
 		{5B1A7822-260E-4A04-8F01-F3E4C4531D38} = {836DD213-6C64-4668-BC6A-7C9A613E6F83}
 		{A0C6A38E-A3B2-4A86-83DD-8B241EB6B3B1} = {D67FF784-579F-4C95-B9A5-CB148051BED0}
 		{1A1F5052-3D3B-4995-BD86-5FFE59B7434E} = {08A8A592-3323-4EC1-9671-3EA026DB2F02}
-	EndGlobalSection
-	GlobalSection(TeamFoundationVersionControl) = preSolution
-		SccNumberOfProjects = 14
-		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
-		SccTeamFoundationServer = https://bestpetrovich.visualstudio.com/
-		SccLocalPath0 = .
-		SccProjectUniqueName1 = Impl\\Impl.Core\\Impl.Core.csproj
-		SccProjectTopLevelParentUniqueName1 = WebBar.sln
-		SccProjectName1 = Impl/Impl.Core
-		SccLocalPath1 = Impl\\Impl.Core
-		SccProjectUniqueName2 = Contracts\\Contracts.Common\\Contracts.Common.csproj
-		SccProjectTopLevelParentUniqueName2 = WebBar.sln
-		SccProjectName2 = Contracts/Contracts.Common
-		SccLocalPath2 = Contracts\\Contracts.Common
-		SccProjectUniqueName3 = Impl\\Impl.Client\\Impl.Client.csproj
-		SccProjectTopLevelParentUniqueName3 = WebBar.sln
-		SccProjectName3 = Impl/Impl.Client
-		SccLocalPath3 = Impl\\Impl.Client
-		SccProjectUniqueName4 = App\\WebBar.AuthorizeServer\\WebBar.AuthorizeServer.csproj
-		SccProjectTopLevelParentUniqueName4 = WebBar.sln
-		SccProjectName4 = App/WebBar.AuthorizeServer
-		SccLocalPath4 = App\\WebBar.AuthorizeServer
-		SccProjectUniqueName5 = Impl\\Impl.Server\\Impl.Server.csproj
-		SccProjectTopLevelParentUniqueName5 = WebBar.sln
-		SccProjectName5 = Impl/Impl.Server
-		SccLocalPath5 = Impl\\Impl.Server
-		SccProjectUniqueName6 = App\\WebBar.Site\\WebBar.Site.csproj
-		SccProjectTopLevelParentUniqueName6 = WebBar.sln
-		SccProjectName6 = App/WebBar.Site
-		SccLocalPath6 = App\\WebBar.Site
-		SccProjectUniqueName7 = Tests\\WebBar.Site.UnitTests\\WebBar.Site.UnitTests.csproj
-		SccProjectTopLevelParentUniqueName7 = WebBar.sln
-		SccProjectName7 = Tests/WebBar.Site.UnitTests
-		SccLocalPath7 = Tests\\WebBar.Site.UnitTests
-		SccProjectUniqueName8 = Tests\\SmallTests\\SmallTests.csproj
-		SccProjectTopLevelParentUniqueName8 = WebBar.sln
-		SccProjectName8 = Tests/SmallTests
-		SccLocalPath8 = Tests\\SmallTests
-		SccProjectUniqueName9 = Contracts\\Contracts.Retail\\Contracts.Retail.csproj
-		SccProjectTopLevelParentUniqueName9 = WebBar.sln
-		SccProjectName9 = Contracts/Contracts.Retail
-		SccLocalPath9 = Contracts\\Contracts.Retail
-		SccProjectUniqueName10 = Tests\\Retail.SmallTests\\Retail.SmallTests.csproj
-		SccProjectTopLevelParentUniqueName10 = WebBar.sln
-		SccProjectName10 = Tests/Retail.SmallTests
-		SccLocalPath10 = Tests\\Retail.SmallTests
-		SccProjectUniqueName11 = Impl\\Impl.DAL\\Impl.DAL.csproj
-		SccProjectTopLevelParentUniqueName11 = WebBar.sln
-		SccProjectName11 = Impl/Impl.DAL
-		SccLocalPath11 = Impl\\Impl.DAL
-		SccProjectUniqueName12 = App\\WebBar.BeerServer\\WebBar.BeerServer.csproj
-		SccProjectTopLevelParentUniqueName12 = WebBar.sln
-		SccProjectName12 = App/WebBar.BeerServer
-		SccLocalPath12 = App\\WebBar.BeerServer
-		SccProjectUniqueName13 = Contracts\\Contracts\\Contracts.csproj
-		SccProjectTopLevelParentUniqueName13 = WebBar.sln
-		SccProjectName13 = Contracts/Contracts
-		SccLocalPath13 = Contracts\\Contracts
 	EndGlobalSection
 EndGlobal

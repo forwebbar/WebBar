@@ -55,7 +55,8 @@ namespace WebBar.Site.CompositionRoot
             _kernel = new StandardKernel();
             try
             {
-                _kernel.Bind<Func<IKernel>>().ToMethod(ctx => () => _kernel);
+                var kernel = _kernel;
+                _kernel.Bind<Func<IKernel>>().ToMethod(ctx => () => kernel);
                 _kernel.Bind<IHttpModule>().To<HttpApplicationInitializationHttpModule>();
 
                 RegisterServices(_kernel);

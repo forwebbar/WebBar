@@ -1,4 +1,5 @@
-﻿@using GridMvc.Html
+﻿@using System.Web.Optimization
+@using GridMvc.Html
 @using WebBar.Site.Enum
 @using WebBar.Site.Models
 @model SaleViewModel
@@ -11,242 +12,180 @@
     </nav>*@
 
 <div class="jumbotron">
-    <nav class="navbar navbar-default navbarWhite">
-        <div class="container-fluid">
-            <div id="navbar" class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
-                    <li class="active"><a href="#">Отчеты</a></li>
-                    <li><a href="#">Поступления</a></li>
-                    <li>@Html.ActionLink("Справочники", "Index", "References")</li>
-                    <li><a href="#">Настройки</a></li>
+<nav class="navbar navbar-default navbarWhite">
+    <div class="container-fluid">
+        <div id="navbar" class="navbar-collapse collapse">
+            <ul class="nav navbar-nav">
+                <li class="active"><a href="#">Отчеты</a></li>
+                <li><a href="#">Поступления</a></li>
+                <li>@Html.ActionLink("Справочники", "Index", "References")</li>
+                <li><a href="#">Настройки</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<h2>Продажи</h2>
+<table>
+    <tr>
+        <td>
+            <nav>
+                <ul class="nav nav-pills nav-justified">
+                    <li class=@(Model.DateTimeFilterType == FilterTypeEnum.Today ? "active" : "")>
+                        @Html.ActionLink("Сегодня", "Index", "Home", new {beerType = Model.SelectedBeerType, shopId = Model.CurrentShopId, filterType = FilterTypeEnum.Today, isDetail = Model.IsDetail}, null)
+                    </li>
+                    <li class=@(Model.DateTimeFilterType == FilterTypeEnum.Yesterday ? "active" : "")>
+                        @Html.ActionLink("Вчера", "Index", "Home", new {beerType = Model.SelectedBeerType, shopId = Model.CurrentShopId, filterType = FilterTypeEnum.Yesterday, isDetail = Model.IsDetail}, null)
+                    </li>
+                    <li class=@(Model.DateTimeFilterType == FilterTypeEnum.Week ? "active" : "")>@Html.ActionLink("Неделя", "Index", "Home", new {beerType = Model.SelectedBeerType, shopId = Model.CurrentShopId, filterType = FilterTypeEnum.Week, isDetail = Model.IsDetail}, null)</li>
+                    <li class=@(Model.DateTimeFilterType == FilterTypeEnum.Month ? "active" : "")>@Html.ActionLink("Месяц", "Index", "Home", new {beerType = Model.SelectedBeerType, shopId = Model.CurrentShopId, filterType = FilterTypeEnum.Month, isDetail = Model.IsDetail}, null)</li>
+                    <li class=@(Model.DateTimeFilterType == FilterTypeEnum.Quater ? "active" : "")>@Html.ActionLink("Квартал", "Index", "Home", new {beerType = Model.SelectedBeerType, shopId = Model.CurrentShopId, filterType = FilterTypeEnum.Quater, isDetail = Model.IsDetail}, null)</li>
+                    <li class=@(Model.DateTimeFilterType == FilterTypeEnum.Year ? "active" : "")>@Html.ActionLink("Год", "Index", "Home", new {beerType = Model.SelectedBeerType, shopId = Model.CurrentShopId, filterType = FilterTypeEnum.Year, isDetail = Model.IsDetail}, null)</li>
+                    @*<li class=@(Model.DateTimeFilterType == FilterTypeEnum.Custom ? "active" : "")>@Html.ActionLink("Произвольный", "Index", "Home", new { beerType = Model.SelectedBeerType, shopId = Model.SelectedBeerType, filterType = FilterTypeEnum.Custom, filterDateStart = Model.FilterDateStart, filterDateEnd = Model.FilterDateEnd, isDetail = Model.IsDetail }, new { id = "customDatesTabLink" })</li>*@
+                </ul>
+
+            </nav>
+        </td>
+        <td>
+
+            <div class="input-group date" id="datetimepickerStart">
+                <input type="text" class="form-control"/>
+                <span class="input-group-addon">
+                        <span class="glyphicon glyphicon-calendar"></span>
+                    </span>
+            </div>
+        </td>
+        <td>
+
+            <div class="centerBlock">
+                -
+            </div>
+        </td>
+        <td>
+            <div class="input-group date" id="datetimepickerEnd">
+                <input type="text" class="form-control"/>
+                <span class="input-group-addon">
+                        <span class="glyphicon glyphicon-calendar"></span>
+                    </span>
+            </div>
+        </td>
+        <td width="100%"></td>
+        <td>
+            <a href="../../download.aspx?file=ReportUpload\@Model.Report1CFileName">
+                <img src="@Url.Content("~/Images/1c.png")" alt="Экспорт в 1С"/>
+            </a>
+        </td>
+        <td>
+            <a href="../../download.aspx?file=ReportUpload\@Model.ReportExcelFileName">
+                <img src="@Url.Content("~/Images/exel.png")" alt="Экспорт в Excel"/>
+            </a>
+        </td>
+    </tr>
+</table>
+
+
+<table>
+    <tr>
+        <td>
+            <div class="dropdown">
+                <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    @if (Model.SelectedBeerType != null)
+                    {
+                        <span>@Model.SelectedBeerName</span>
+                    }
+                    else
+                    {
+                        <span>Все сорта:</span>
+                    }
+
+                    <span class="caret"></span>
+                </button>
+                <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+
+                    <li>@Html.ActionLink("Все сорта", "Index", "Home", new {shopId = Model.CurrentShopId, filterType = Model.DateTimeFilterType, filterDateStart = Model.FilterDateStart, filterDateEnd = Model.FilterDateEnd, isDetail = Model.IsDetail}, null)</li>
+                    @foreach (var beerType in Model.ShopRepository.GetBeerTypes())
+                    {
+                        <li>@Html.ActionLink(beerType.Name, "Index", "Home", new {beerType = beerType.Id, shopId = Model.CurrentShopId, filterType = Model.DateTimeFilterType, filterDateStart = Model.FilterDateStart, filterDateEnd = Model.FilterDateEnd, isDetail = Model.IsDetail}, null)</li>
+                    }
                 </ul>
             </div>
-        </div>
-    </nav>
-
-    <h2>Продажи</h2>
-    <table>
-        <tr>
-            <td>
-                <nav>
-                    <ul class="nav nav-pills nav-justified">
-                        <li class=@(Model.DateTimeFilterType == FilterTypeEnum.Today ? "active" : "")>@Html.ActionLink("Сегодня", "Index", "Home", new { beerType = Model.SelectedBeerType, shopId = Model.CurrentShopId, filterType = FilterTypeEnum.Today, isDetail = Model.IsDetail }, null)</li>
-                        <li class=@(Model.DateTimeFilterType == FilterTypeEnum.Yesterday ? "active" : "")>@Html.ActionLink("Вчера", "Index", "Home", new { beerType = Model.SelectedBeerType, shopId = Model.CurrentShopId, filterType = FilterTypeEnum.Yesterday, isDetail = Model.IsDetail }, null)</li>
-                        <li class=@(Model.DateTimeFilterType == FilterTypeEnum.Week ? "active" : "")>@Html.ActionLink("Неделя", "Index", "Home", new { beerType = Model.SelectedBeerType, shopId = Model.CurrentShopId, filterType = FilterTypeEnum.Week, isDetail = Model.IsDetail }, null)</li>
-                        <li class=@(Model.DateTimeFilterType == FilterTypeEnum.Month ? "active" : "")>@Html.ActionLink("Месяц", "Index", "Home", new { beerType = Model.SelectedBeerType, shopId = Model.CurrentShopId, filterType = FilterTypeEnum.Month, isDetail = Model.IsDetail }, null)</li>
-                        <li class=@(Model.DateTimeFilterType == FilterTypeEnum.Quater ? "active" : "")>@Html.ActionLink("Квартал", "Index", "Home", new { beerType = Model.SelectedBeerType, shopId = Model.CurrentShopId, filterType = FilterTypeEnum.Quater, isDetail = Model.IsDetail }, null)</li>
-                        <li class=@(Model.DateTimeFilterType == FilterTypeEnum.Year ? "active" : "")>@Html.ActionLink("Год", "Index", "Home", new { beerType = Model.SelectedBeerType, shopId = Model.CurrentShopId, filterType = FilterTypeEnum.Year, isDetail = Model.IsDetail }, null)</li>
-                        @*<li class=@(Model.DateTimeFilterType == FilterTypeEnum.Custom ? "active" : "")>@Html.ActionLink("Произвольный", "Index", "Home", new { beerType = Model.SelectedBeerType, shopId = Model.SelectedBeerType, filterType = FilterTypeEnum.Custom, filterDateStart = Model.FilterDateStart, filterDateEnd = Model.FilterDateEnd, isDetail = Model.IsDetail }, new { id = "customDatesTabLink" })</li>*@
-                    </ul>
-
-                </nav>
-            </td>
-            <td>
-
-                <div class="input-group date" id="datetimepickerStart">
-                    <input type="text" class="form-control" />
-                    <span class="input-group-addon">
-                        <span class="glyphicon glyphicon-calendar"></span>
-                    </span>
-                </div>
-            </td>
-            <td>
-
-                <div class="centerBlock">
-                    -
-                </div>
-            </td>
-            <td>
-                <div class="input-group date" id="datetimepickerEnd">
-                    <input type="text" class="form-control" />
-                    <span class="input-group-addon">
-                        <span class="glyphicon glyphicon-calendar"></span>
-                    </span>
-                </div>
-            </td>
-            <td width="100%"></td>
-            <td>
-                <a href="../../download.aspx?file=ReportUpload\@Model.Report1CFileName">
-                    <img src="@Url.Content("~/Images/1c.png")" alt="Экспорт в 1С" />
-                </a>
-            </td>
-            <td>
-                <a href="../../download.aspx?file=ReportUpload\@Model.ReportExcelFileName">
-                    <img src="@Url.Content("~/Images/exel.png")" alt="Экспорт в Excel" />
-                </a>
-            </td>
-        </tr>
-    </table>
-    <script type="text/javascript">
-        $(function () {
-            //debugger;
-            $("#datetimepickerStart").datetimepicker({ locale: 'ru', format: 'DD-MM-YYYY', date: '@Model.FilterDateStart.GetValueOrDefault().ToString("o")' });
-            $("#datetimepickerEnd").datetimepicker({ locale: 'ru', format: 'DD-MM-YYYY', date: '@Model.FilterDateEnd.GetValueOrDefault().ToString("o")' });
-
-            $("#datetimepickerStart").on("dp.change", function (e) {
-                // $("#datetimepickerEnd").data("DateTimePicker").minDate(e.date);
-
-                var endDate = $("#datetimepickerEnd").data("DateTimePicker").date();
-                window.location.href = "/?beerType=@Model.SelectedBeerType&shopId=@Model.CurrentShopId&isDetail=@Model.IsDetail&filterType=Custom&filterDateStart=" + e.date.toISOString() + "&filterDateEnd=" + endDate.toISOString();
-
-            });
-
-            $("#datetimepickerEnd").on("dp.change", function (e) {
-                var startDate = $("#datetimepickerStart").data("DateTimePicker").date();
-                window.location.href = "/?beerType=@Model.SelectedBeerType&isDetail=@Model.IsDetail&shopId=@Model.CurrentShopId&filterDateStart=" + startDate.toISOString() + "&filterDateEnd=" + e.date.toISOString();
-
-
-            });
-
-
-            function getParameterByName(name, url) {
-                if (!url) url = window.location.href;
-                name = name.replace(/[\[\]]/g, "\\$&");
-                var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
-                    results = regex.exec(url);
-                if (!results) return null;
-                if (!results[2]) return '';
-                return decodeURIComponent(results[2].replace(/\+/g, " "));
-            }
-
-            $(".cleaningChb").click(function () {
-
-                var beerTypeName = "idBeerType";
-                var beerTypeValue = getParameterByName(beerTypeName);
-                var isBeerTypeCleaningName = "isBeerTypeCleaning";
-                var isBeerTypeCleaningValue = getParameterByName(isBeerTypeCleaningName);
-                var idSummaryName = "idSummary";
-                var idSummaryValue = getParameterByName(idSummaryName);
-
-                var url = window.location.href;
-
-                var newbeerTypeString = beerTypeName + "=" + $(this).attr('data-idBeerType');
-                if (beerTypeValue == null)
-                    url += "&"+newbeerTypeString;
-                else
-                    url = url.replace(beerTypeName + "=" + beerTypeValue,newbeerTypeString);
-
-
-                var newBeerTypeCleaningString = isBeerTypeCleaningName + "=" + $(this).attr('data-isBeerTypeCleaning');
-                if (isBeerTypeCleaningValue == null)
-                    url += "&" + newBeerTypeCleaningString;
-                else
-                    url = url.replace(isBeerTypeCleaningName + "=" + beerTypeValue, newBeerTypeCleaningString);
-
-                var newSummaryString = idSummaryName + "=" + $(this).attr('data-idSummary');
-                if (beerTypeValue == null)
-                    url += "&" + newSummaryString;
-                else
-                    url = url.replace(idSummaryName + "=" + idSummaryValue, newSummaryString);
-
-                window.location.href = url;
-
-            });
-        });
-
-    </script>
-
-    <table>
-        <tr>
-            <td>
-                <div class="dropdown">
-                    <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        @if (Model.SelectedBeerType != null)
+        </td>
+        <td>
+            @Html.ActionLink("X", "Index", "Home", new {shopId = Model.CurrentShopId, filterType = Model.DateTimeFilterType, filterDateStart = Model.FilterDateStart, filterDateEnd = Model.FilterDateEnd, isDetail = Model.IsDetail}, new {@class = "btn btn-default reset", role = "button"})
+        </td>
+        <td width="20px"></td>
+        <td>
+            <div class="dropdown">
+                <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    @if (Model.CurrentShopId != null)
+                    {
+                        <span>@Model.CurrentShopAddress</span>
+                    }
+                    else
+                    {
+                        <span>Все точки продаж:</span>
+                    }
+                    <span class="caret"></span>
+                </button>
+                <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
+                    <li>@Html.ActionLink("Все точки продаж", "Index", "Home", new {beerType = Model.SelectedBeerType, filterType = Model.DateTimeFilterType, filterDateStart = Model.FilterDateStart, filterDateEnd = Model.FilterDateEnd, isDetail = Model.IsDetail}, null)</li>
+                    @foreach (var shop in Model.ShopRepository.GetShops())
+                    {
+                        <li>@Html.ActionLink(shop.Name, "Index", "Home", new {beerType = Model.SelectedBeerType, shopId = shop.Id, filterType = Model.DateTimeFilterType, filterDateStart = Model.FilterDateStart, filterDateEnd = Model.FilterDateEnd, isDetail = Model.IsDetail}, null)</li>
+                    }
+                </ul>
+            </div>
+        </td>
+        <td>
+            @Html.ActionLink("X", "Index", "Home", new
             {
-                            <span>@Model.SelectedBeerName</span>
-                        }
-                        else
-                        {
-                            <span>Все сорта:</span>
-                        }
+                beerType = Model.SelectedBeerType, filterType = Model.DateTimeFilterType, filterDateStart = Model.FilterDateStart, filterDateEnd = Model.FilterDateEnd, isDetail = Model.IsDetail
 
-                        <span class="caret"></span>
-                    </button>
-                    <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-
-                        <li>@Html.ActionLink("Все сорта", "Index", "Home", new { shopId = Model.CurrentShopId, filterType = Model.DateTimeFilterType, filterDateStart = Model.FilterDateStart, filterDateEnd = Model.FilterDateEnd, isDetail = Model.IsDetail }, null)</li>
-                        @foreach (var beerType in Model.ShopRepository.GetBeerTypes())
-            {
-                            <li>@Html.ActionLink(beerType.Name, "Index", "Home", new { beerType = beerType.Id, shopId = Model.CurrentShopId, filterType = Model.DateTimeFilterType, filterDateStart = Model.FilterDateStart, filterDateEnd = Model.FilterDateEnd, isDetail = Model.IsDetail }, null)</li>
-                        }
-                    </ul>
-                </div>
-            </td>
-            <td>
-                @Html.ActionLink("X", "Index", "Home", new { shopId = Model.CurrentShopId, filterType = Model.DateTimeFilterType, filterDateStart = Model.FilterDateStart, filterDateEnd = Model.FilterDateEnd, isDetail = Model.IsDetail }, new { @class = "btn btn-default reset", role = "button" })
-            </td>
+            }, new {@class = "btn btn-default reset", role = "button"})
+        </td>
+        @if (Model.CurrentShopId != null)
+        {
             <td width="20px"></td>
             <td>
-                <div class="dropdown">
-                    <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        @if (Model.CurrentShopId != null)
-                        {
-                            <span>@Model.CurrentShopAddress</span>
-                        }
-                        else
-                        {
-                            <span>Все точки продаж:</span>
-                        }
-                        <span class="caret"></span>
-                    </button>
-                    <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
-                        <li>@Html.ActionLink("Все точки продаж", "Index", "Home", new { beerType = Model.SelectedBeerType, filterType = Model.DateTimeFilterType, filterDateStart = Model.FilterDateStart, filterDateEnd = Model.FilterDateEnd, isDetail = Model.IsDetail }, null)</li>
-                        @foreach (var shop in Model.ShopRepository.GetShops())
-                        {
-                            <li>@Html.ActionLink(shop.Name, "Index", "Home", new { beerType = Model.SelectedBeerType, shopId = shop.Id, filterType = Model.DateTimeFilterType, filterDateStart = Model.FilterDateStart, filterDateEnd = Model.FilterDateEnd, isDetail = Model.IsDetail }, null)</li>
-                        }
-                    </ul>
-                </div>
+                <ul class="nav nav-pills nav-justified">
+                    <li class=@(Model.IsDetail ? "active" : "")>
+                        @Html.ActionLink("Детализация", "Index", "Home", new {beerType = Model.SelectedBeerType, shopId = Model.CurrentShopId, filterType = Model.DateTimeFilterType, isDetail = !Model.IsDetail}, null)
+                    </li>
+                </ul>
+
             </td>
-            <td>
-                @Html.ActionLink("X", "Index", "Home", new
-                {
-                    beerType = Model.SelectedBeerType, filterType = Model.DateTimeFilterType, filterDateStart = Model.FilterDateStart, filterDateEnd = Model.FilterDateEnd, isDetail = Model.IsDetail
+        }
+    </tr>
+</table>
 
-                }, new {@class = "btn btn-default reset", role = "button"})
-            </td>
-            @if (Model.CurrentShopId != null)
-            {
-                <td width="20px"></td>
-                <td>
-                    <ul class="nav nav-pills nav-justified">
-                        <li class=@(Model.IsDetail ? "active" : "")>
-                            @Html.ActionLink("Детализация", "Index", "Home", new {beerType = Model.SelectedBeerType, shopId = Model.CurrentShopId, filterType = Model.DateTimeFilterType, isDetail = !Model.IsDetail}, null)
-                        </li>
-                    </ul>
+<p><h4><b>Выручка: @Model.TotalRub.ToString("0.00") рублей</b></h4></p>
+<p><h4><b>Пролив: @Model.TotalLitres.ToString("0.00") литров</b></h4></p>
 
-                </td>
-            }
-        </tr>
-    </table>
-
-    <p><h4><b>Выручка: @Model.TotalRub.ToString("0.00") руб.</b></h4></p>
-    <p><h4><b>Пролив: @Model.TotalLitres.ToString("0.00") л.</b></h4> </p>
-
-    @helper PngImageRender(byte[] customer)
-    {
+@helper PngImageRender(byte[] customer)
+{
     <div>
-        <img src="data:image/png;base64,@Convert.ToBase64String(customer)" alt="График выручки за неделю" />
+        <img src="data:image/png;base64,@Convert.ToBase64String(customer)" alt="График выручки за неделю"/>
     </div>
 
 }
 
-    @helper DifferenceRender(double value, bool isNormalValue)
+@helper DifferenceRender(double value, bool isNormalValue)
+{
+    if (isNormalValue)
     {
-if (isNormalValue)
-{
         <p>@value.ToString("0.00")</p>
-}
-else
-{
+    }
+    else
+    {
         <p style="color: red">@value.ToString("0.00")</p>
-}
+    }
 
 }
-    @helper CashValueRender(double value, double percent)
-    {
+@helper CashValueRender(double value, double percent)
+{
+    var temp = @value/100d;
     <p>
-        @value.ToString("0.00")
+        @temp.ToString("0.00")
         @if (percent > 0)
         {
             <span style="color: green">@percent.ToString("0.00") %</span>
@@ -258,71 +197,92 @@ else
     </p>
 }
 
-    @helper DateTimeRender(DateTimeOffset dt, string format)
-    {
+@helper CashFillRender(double value, double percent)
+{
+    var temp = @value/1000d;
+    <p>
+        @temp.ToString("0.0000");
+        @if (percent > 0)
+        {
+            <span style="color: green">@percent.ToString("0.00") %</span>
+        }
+        else
+        {
+            <span style="color: red">@percent.ToString("0.00") %</span>
+        }
+    </p>
+}
+
+@helper DateTimeRender(DateTimeOffset dt, string format)
+{
     <p>
         @dt.ToString(format)
     </p>
-    } 
-    @helper DoubleRender(double dt, string format)
+}
+@helper DoubleRender(double dt, string format)
 {
-      <p>
-          @dt.ToString(format)
-      </p>
-  }
-    @helper EmptyRender()
-    {
+    <p>
+        @dt.ToString(format)
+    </p>
+}
+@helper EmptyRender()
+{
     <p>
     </p>
 }
 
 
 
-    
+
 @helper BoolRender(bool value, int idBeerType, long idSummary)
-  {
+{
     <p>
         <div class="checkbox">
-                <input class="cleaningChb" type="checkbox" @(value ? "checked" : "") data-idBeerType="@idBeerType" data-idSummary="@idSummary" data-isBeerTypeCleaning="@(!value)"/> 
+            <input class="cleaningChb" type="checkbox" @(value ? "checked" : "") data-idBeerType="@idBeerType" data-idSummary="@idSummary" data-isBeerTypeCleaning="@(!value)"/>
         </div>
     </p>
 
-    }
+}
 
 @helper TitleShopRender(string shopName, int shopIdVal)
 {
     @Html.ActionLink(shopName, "Index", "Home", new
     {
         beerType = Model.SelectedBeerType, shopId = shopIdVal, filterType = Model.DateTimeFilterType, filterDateStart = Model.FilterDateStart, filterDateEnd = Model.FilterDateEnd, isDetail = true
-    
+
     }, null)
 }
 
 @if (!Model.IsDetail || Model.CurrentShopId == null)
+{
+    @Html.Grid(Model.GetShopViews()).Columns(columns =>
     {
-        @Html.Grid(Model.GetShopViews()).Columns(columns =>
-        {
-            columns.Add(c => c.Shop.Name).Titled("Магазин").Sanitized(false).Encoded(false).RenderValueAs(a => TitleShopRender(a.Shop.Name, a.Shop.Id));
-            columns.Add(c => c.Summary.Money).Titled("Сумма, руб.").Sanitized(false).Encoded(false).RenderValueAs(a => CashValueRender(a.Summary.Money, a.Summary.MoneyShift));
-            columns.Add(c => c.Summary.Img).Titled("Выручка за неделю").Sanitized(false).Encoded(false).RenderValueAs(a => PngImageRender(Model.FakePng));
-            columns.Add(c => c.Summary.Fill).Titled("Пролив, л.").Sanitized(false).Encoded(false).RenderValueAs(a => CashValueRender(a.Summary.Fill, a.Summary.FillShift));
-            columns.Add(c => c.Summary.MoneyDelta).Titled("Расхождение, руб.").Sanitized(false).Encoded(false).RenderValueAs(a => DifferenceRender(a.Summary.MoneyDelta, true));
-        }).WithPaging(10).Sortable(true)
-    }
-    else
+        columns.Add(c => c.Shop.Name).Titled("Магазин").Sanitized(false).Encoded(false).RenderValueAs(a => TitleShopRender(a.Shop.Name, a.Shop.Id));
+        columns.Add(c => c.Summary.Money).Titled("Сумма, руб.").Sanitized(false).Encoded(false).RenderValueAs(a => CashValueRender(a.Summary.Money, a.Summary.MoneyShift));
+        columns.Add(c => c.Summary.Img).Titled("Выручка за неделю").Sanitized(false).Encoded(false).RenderValueAs(a => PngImageRender(Model.FakePng));
+        columns.Add(c => c.Summary.Fill).Titled("Пролив, л.").Sanitized(false).Encoded(false).RenderValueAs(a => CashFillRender(a.Summary.Fill, a.Summary.FillShift));
+        columns.Add(c => c.Summary.MoneyDelta).Titled("Расхождение, руб.").Sanitized(false).Encoded(false).RenderValueAs(a => DifferenceRender(a.Summary.MoneyDelta, true));
+    }).WithPaging(10).Sortable(true)
+}
+else
+{
+    @Html.Grid(Model.GetDetailViews()).Columns(columns =>
     {
-        @Html.Grid(Model.GetDetailViews()).Columns(columns =>
-   {
-       columns.Add(c => c.Summary.Ts).Titled("Дата").Sanitized(false).Encoded(false).RenderValueAs(a => DateTimeRender(a.Summary.Ts, "dd.MM.yyyy"));
-       columns.Add(c => c.Summary.Ts.Date).Titled("Время").Sanitized(false).Encoded(false).RenderValueAs(a => DateTimeRender(a.Summary.Ts, "HH:mm:ss"));
-       if (Model.SelectedBeerType == null) columns.Add(c => c.Drink.Name).Titled("Сорт");
-       columns.Add(c => c.Summary.Fill).Titled("Объём, л.").Sanitized(false).Encoded(false).RenderValueAs(a => DoubleRender(a.Summary.Fill / 1000D, "0.00"));
-       columns.Add(c => c.Summary.Price).Titled("Цена, руб.").Sanitized(false).Encoded(false).RenderValueAs(a => a.Summary.IsCleaning ? EmptyRender() : DoubleRender(a.Summary.Price / 100D, "0.00"));
-       columns.Add(c => c.Summary.Money).Titled("Сумма, руб.").Sanitized(false).Encoded(false).RenderValueAs(a => a.Summary.IsCleaning ? EmptyRender() : DoubleRender(a.Summary.Money / 100D, "0.00"));
-       columns.Add(c => c.Summary.MoneyDelta).Titled("Расхождение, руб.").Sanitized(false).Encoded(false).RenderValueAs(a => a.Summary.IsCleaning ? EmptyRender() : DifferenceRender(a.Summary.MoneyDelta/100D, a.Summary.IsMoneyDeltaRed));
-       columns.Add(c => c.Summary.IsCleaning).Titled("Пром.").Sanitized(false).Encoded(false).RenderValueAs(a => BoolRender(a.Summary.IsCleaning, a.Drink.Id, a.Summary.Id));
+        columns.Add(c => c.Summary.Ts).Titled("Дата").Sanitized(false).Encoded(false).RenderValueAs(a => DateTimeRender(a.Summary.Ts, "dd.MM.yyyy"));
+        columns.Add(c => c.Summary.Ts.Date).Titled("Время").Sanitized(false).Encoded(false).RenderValueAs(a => DateTimeRender(a.Summary.Ts, "HH:mm:ss"));
+        if (Model.SelectedBeerType == null) columns.Add(c => c.Drink.Name).Titled("Сорт");
+        columns.Add(c => c.Summary.Fill).Titled("Объём, л.").Sanitized(false).Encoded(false).RenderValueAs(a => DoubleRender(a.Summary.Fill/1000D, "0.00"));
+        columns.Add(c => c.Summary.Price).Titled("Цена, руб.").Sanitized(false).Encoded(false).RenderValueAs(a => a.Summary.IsCleaning ? EmptyRender() : DoubleRender(a.Summary.Price/100D, "0.00"));
+        columns.Add(c => c.Summary.Money).Titled("Сумма, руб.").Sanitized(false).Encoded(false).RenderValueAs(a => a.Summary.IsCleaning ? EmptyRender() : DoubleRender(a.Summary.Money/100D, "0.00"));
+        columns.Add(c => c.Summary.MoneyDelta).Titled("Расхождение, руб.").Sanitized(false).Encoded(false).RenderValueAs(a => a.Summary.IsCleaning ? EmptyRender() : DifferenceRender(a.Summary.MoneyDelta/100D, a.Summary.IsMoneyDeltaRed));
+        columns.Add(c => c.Summary.IsCleaning).Titled("Пром.").Sanitized(false).Encoded(false).RenderValueAs(a => BoolRender(a.Summary.IsCleaning, a.Drink.Id, a.Summary.Id));
 
-   }).WithPaging(10).Sortable(true)
+    }).WithPaging(10).Sortable(true)
 
-    }
+}
 </div>
+
+@section scripts
+{
+    @Scripts.Render("~/bundles/home_scripts");
+}

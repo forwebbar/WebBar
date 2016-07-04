@@ -74,7 +74,7 @@ namespace WebBar.BeerServer.Data
         private SellSummaryDto DoGetMarketSellSummary(BeerControlEntities context, int idMarket, DateTimeOffset startTs, DateTimeOffset endTs)
         {
             var dto = new SellSummaryDto();
-            var sells = context.Sell.Where(s => s.idMarket == idMarket && s.Ts >= startTs && s.Ts <= endTs)
+            var sells = context.Sell.Where(s => s.idMarket == idMarket)// && s.Ts >= startTs && s.Ts <= endTs)
                 .Select(s => new {s.Sum, s.Volume, s.isCleaning}).ToArray();
 
             dto.Fill = (uint) sells.Sum(s => s.Volume);
